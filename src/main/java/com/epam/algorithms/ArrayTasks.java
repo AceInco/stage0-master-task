@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return null;
+        return new String[]{"Winter", "Spring", "Summer", "Autumn"};
     }
 
     /**
@@ -23,7 +23,11 @@ public class ArrayTasks {
      * length = 1  -> [1] length = 3  -> [1, 2, 3] length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-        return null;
+        int[] res = new int[length];
+        for (int i = 0; i < length; i++) {
+            res[i] = i + 1;
+        }
+        return res;
     }
 
     /**
@@ -34,7 +38,11 @@ public class ArrayTasks {
      * arr = [1, 3, 5]   -> sum = 9 arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-        return 0;
+        int res = 0;
+        for (int elem: arr) {
+            res += elem;
+        }
+        return res;
     }
 
     /**
@@ -46,7 +54,12 @@ public class ArrayTasks {
      * arr = [99, -7, 102], number = -7    ->   2 arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-        return 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -58,7 +71,11 @@ public class ArrayTasks {
      * "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-        return null;
+        String[] res = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[arr.length - i - 1] = arr[i];
+        }
+        return res;
     }
 
     /**
@@ -70,7 +87,21 @@ public class ArrayTasks {
      * arr = [1,-2, 3]      -> [1, 3] arr = [-1, -2, -3]   -> [] arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-        return null;
+        int countPositive = 0;
+        for (int elem:arr) {
+            if (elem > 0){
+                countPositive++;
+            }
+        }
+        int[] res = new int[countPositive];
+        countPositive = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] > 0){
+                res[countPositive] = arr[i];
+                countPositive++;
+            }
+        }
+        return res;
     }
 
     /**
@@ -83,7 +114,43 @@ public class ArrayTasks {
      * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]] arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        return null;
+        int[][] res = new int[arr.length][];
+        for (int i = 0; i < arr.length; i++) {
+            int[] oneDArr = arr[i];
+            int pos;
+            int temp;
+            for (int j = 0; j < oneDArr.length; j++) {
+                pos = j;
+                for (int k = 0; k < oneDArr.length; k++) {
+                    if (oneDArr[k] < oneDArr[pos])                  //find the index of the minimum element
+                    {
+                        pos = k;
+                    }
+                }
+                temp = oneDArr[pos];            //swap the current element with the minimum element
+                oneDArr[pos] = oneDArr[j];
+                oneDArr[j] = temp;
+            }
+            res[i] = oneDArr;
+        }
+        int pos;
+        int[] temp;
+        for (int i = 0; i < res.length; i++)
+        {
+            pos = i;
+            for (int j = i+1; j < res.length; j++)
+            {
+                if (res[j].length < res[pos].length)                  //find the index of the minimum element
+                {
+                    pos = j;
+                }
+            }
+
+            temp = res[pos];            //swap the current element with the minimum element
+            res[pos] = res[i];
+            res[i] = temp;
+        }
+        return res;
     }
 
 }

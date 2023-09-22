@@ -95,9 +95,9 @@ public class ArrayTasks {
         }
         int[] res = new int[countPositive];
         countPositive = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i] > 0){
-                res[countPositive] = arr[i];
+        for (int j : arr) {
+            if (j > 0) {
+                res[countPositive] = j;
                 countPositive++;
             }
         }
@@ -114,43 +114,45 @@ public class ArrayTasks {
      * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]] arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        int[][] res = new int[arr.length][];
-        for (int i = 0; i < arr.length; i++) {
-            int[] oneDArr = arr[i];
-            int pos;
-            int temp;
-            for (int j = 0; j < oneDArr.length; j++) {
-                pos = j;
-                for (int k = 0; k < oneDArr.length; k++) {
-                    if (oneDArr[k] < oneDArr[pos])                  //find the index of the minimum element
-                    {
-                        pos = k;
-                    }
-                }
-                temp = oneDArr[pos];            //swap the current element with the minimum element
-                oneDArr[pos] = oneDArr[j];
-                oneDArr[j] = temp;
-            }
-            res[i] = oneDArr;
-        }
         int pos;
         int[] temp;
-        for (int i = 0; i < res.length; i++)
+        for (int i = 0; i < arr.length; i++)
         {
             pos = i;
-            for (int j = i+1; j < res.length; j++)
+            for (int j = i+1; j < arr.length; j++)
             {
-                if (res[j].length < res[pos].length)                  //find the index of the minimum element
+                if (arr[j].length < arr[pos].length)                  //find the index of the minimum element
                 {
                     pos = j;
                 }
             }
 
-            temp = res[pos];            //swap the current element with the minimum element
-            res[pos] = res[i];
-            res[i] = temp;
+            temp = arr[pos];            //swap the current element with the minimum element
+            arr[pos] = arr[i];
+            arr[i] = temp;
         }
-        return res;
+
+        for (int i = 0; i < arr.length; i++) {
+            int pos1;
+            int temp1;
+            for (int j = 0; j < arr[i].length; j++)
+            {
+                pos1 = j;
+                for (int k = j+1; k < arr[i].length; k++)
+                {
+                    if (arr[i][k] < arr[i][pos1])                  //find the index of the minimum element
+                    {
+                        pos1 = k;
+                    }
+                }
+
+                temp1 = arr[i][pos1];            //swap the current element with the minimum element
+                arr[i][pos1] = arr[i][j];
+                arr[i][j] = temp1;
+            }
+        }
+
+        return arr;
     }
 
 }
